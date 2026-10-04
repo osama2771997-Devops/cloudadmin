@@ -3,77 +3,981 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+
+    <title>Alex Morgan | Full Stack Developer</title>
+
+    <meta name="description" content="Modern portfolio of Alex Morgan, a Full Stack Developer specializing in modern web applications.">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            box-sizing: border-box;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
+
+        html {
+            scroll-behavior: smooth;
         }
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
+
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            background: #070b14;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
-        section {
-            padding: 40px;
-            max-width: 900px;
+
+        /* =========================
+           BACKGROUND
+        ========================== */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #6c5ce7;
+            filter: blur(180px);
+            opacity: 0.18;
+            border-radius: 50%;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #00d4ff;
+            filter: blur(180px);
+            opacity: 0.12;
+            border-radius: 50%;
+            right: -150px;
+            bottom: -150px;
+            z-index: -1;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 7%;
+            backdrop-filter: blur(18px);
+            background: rgba(7, 11, 20, 0.65);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .nav-container {
+            max-width: 1200px;
             margin: auto;
-            background-color: white;
-            margin-top: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #7c6cff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #b9c0d0;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
             color: white;
-            margin-top: 20px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #6c5ce7, #00b8d9);
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108,92,231,0.3);
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: auto;
+            padding: 150px 7% 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 70px;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #bfc6d8;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #42e695;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #42e695;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 82px);
+            line-height: 0.98;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #8c7cff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            color: #9ca6bb;
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            color: white;
+            background: linear-gradient(135deg, #6c5ce7, #00b8d9);
+            box-shadow: 0 15px 35px rgba(108,92,231,0.18);
+        }
+
+        .secondary-btn {
+            color: white;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .primary-btn:hover,
+        .secondary-btn:hover {
+            transform: translateY(-4px);
+        }
+
+        /* =========================
+           HERO CARD
+        ========================== */
+
+        .hero-card {
+            width: 340px;
+            height: 420px;
+            flex-shrink: 0;
+            border-radius: 30px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,0.10),
+                rgba(255,255,255,0.025)
+            );
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+        }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: #7c6cff;
+            filter: blur(80px);
+            opacity: 0.45;
+            top: -70px;
+            right: -50px;
+        }
+
+        .avatar {
+            width: 105px;
+            height: 105px;
+            border-radius: 50%;
+            margin: 35px auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6c5ce7, #00d4ff);
+            box-shadow: 0 15px 50px rgba(0,212,255,0.2);
+        }
+
+        .card-info {
+            text-align: center;
+        }
+
+        .card-info h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .card-info p {
+            color: #8e99af;
+            font-size: 14px;
+        }
+
+        .mini-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 35px;
+        }
+
+        .mini-stat {
+            padding: 15px 5px;
+            text-align: center;
+            background: rgba(255,255,255,0.04);
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .mini-stat strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        .mini-stat span {
+            color: #7f899e;
+            font-size: 10px;
+        }
+
+        /* =========================
+           GENERAL
+        ========================== */
+
+        section {
+            padding: 110px 7%;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-heading {
+            margin-bottom: 50px;
+        }
+
+        .section-label {
+            color: #7c6cff;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(35px, 5vw, 52px);
+            letter-spacing: -2px;
+        }
+
+        .section-heading p {
+            color: #8993a8;
+            max-width: 600px;
+            margin-top: 12px;
+        }
+
+        /* =========================
+           ABOUT
+        ========================== */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .glass-card {
+            padding: 35px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(15px);
+        }
+
+        .glass-card h3 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .glass-card p {
+            color: #8e99ad;
+        }
+
+        /* =========================
+           SKILLS
+        ========================== */
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .skill {
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: rgba(124,108,255,0.08);
+            border: 1px solid rgba(124,108,255,0.18);
+            color: #c8c4ff;
+            font-size: 13px;
+        }
+
+        /* =========================
+           PROJECTS
+        ========================== */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .project {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            min-height: 280px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.4s;
+        }
+
+        .project:hover {
+            transform: translateY(-8px);
+            border-color: rgba(124,108,255,0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .project-number {
+            color: #5f6680;
+            font-size: 13px;
+            margin-bottom: 50px;
+        }
+
+        .project h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .project p {
+            color: #858fa5;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            color: #9b91ff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           EXPERIENCE
+        ========================== */
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 2px;
+            top: 6px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #7c6cff;
+            box-shadow: 0 0 15px rgba(124,108,255,0.7);
+        }
+
+        .timeline-item span {
+            color: #7f89a0;
+            font-size: 13px;
+        }
+
+        .timeline-item h3 {
+            margin: 7px 0;
+        }
+
+        .timeline-item p {
+            color: #858fa4;
+        }
+
+        /* =========================
+           CONTACT
+        ========================== */
+
+        .contact-box {
+            text-align: center;
+            padding: 70px 30px;
+            border-radius: 30px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,108,255,0.12),
+                    rgba(0,212,255,0.05)
+                );
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .contact-box h2 {
+            font-size: clamp(35px, 5vw, 55px);
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            color: #8993a8;
+            max-width: 550px;
+            margin: auto auto 30px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            padding: 35px 7%;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: #697286;
+            font-size: 13px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 130px 5% 70px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            .hero-card {
+                width: 100%;
+                max-width: 340px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<header>
-    <h1>My Portfolio</h1>
+    <!-- NAVIGATION -->
     <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <div class="nav-container">
+
+            <div class="logo">
+                Alex<span>.</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+            </ul>
+
+            <a href="#contact" class="nav-btn">
+                Let's Talk
+            </a>
+
+        </div>
     </nav>
-</header>
 
-<section id="about">
-    <h2>About Me</h2>
-    <p>Hello! I am learning cloud technologies include foundation of cloud computing, Linux, Bash,  Docker, Ansible, Terraform, AWS and Azure Cloud. I wanI  pursue and secure my future career in cloud with AI and security</p>
-</section>
 
-<section id="projects">
-    <h2>Projects</h2>
-    <ul>
-        <li><strong>Project 1:</strong> Personal Blog Website</li>
-        <li><strong>Project 2:</strong> E-commerce Landing Page</li>
-        <li><strong>Project 3:</strong> Portfolio Website</li>
-    </ul>
-</section>
+    <!-- HERO -->
+    <main id="home">
 
-<section id="contact">
-    <h2>Contact</h2>
-    <p>Email: yourname@example.com</p>
-    <p>LinkedIn: <a href="https://www.linkedin.com" target="_blank">My LinkedIn</a></p>
-</section>
+        <section class="hero">
 
-<footer>
-    <p>&copy; 2026 My Portfolio. All rights reserved.</p>
-</footer>
+            <div class="hero-content">
+
+                <div class="badge">
+                    <span class="status-dot"></span>
+                    Available for new opportunities
+                </div>
+
+                <h1>
+                    Building digital
+                    <span class="gradient-text">experiences.</span>
+                </h1>
+
+                <p>
+                    I'm Alex Morgan, a full-stack developer who turns ideas
+                    into fast, scalable and beautiful digital products.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#projects" class="primary-btn">
+                        View My Work →
+                    </a>
+
+                    <a href="#contact" class="secondary-btn">
+                        Get In Touch
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <div class="avatar">
+                    AM
+                </div>
+
+                <div class="card-info">
+                    <h3>Alex Morgan</h3>
+                    <p>Full Stack Developer</p>
+                </div>
+
+                <div class="mini-stats">
+
+                    <div class="mini-stat">
+                        <strong>4+</strong>
+                        <span>Years</span>
+                    </div>
+
+                    <div class="mini-stat">
+                        <strong>35+</strong>
+                        <span>Projects</span>
+                    </div>
+
+                    <div class="mini-stat">
+                        <strong>20+</strong>
+                        <span>Clients</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+        <section id="about">
+
+            <div class="section-container">
+
+                <div class="section-heading">
+                    <div class="section-label">About Me</div>
+                    <h2>Turning ideas into reality.</h2>
+                    <p>
+                        I combine clean engineering with thoughtful design
+                        to create products people actually enjoy using.
+                    </p>
+                </div>
+
+                <div class="about-grid">
+
+                    <div class="glass-card">
+
+                        <h3>Who I Am</h3>
+
+                        <p>
+                            I'm a passionate developer focused on creating
+                            modern web applications, intuitive interfaces
+                            and scalable digital solutions. I enjoy solving
+                            complex problems and turning them into simple
+                            experiences.
+                        </p>
+
+                    </div>
+
+
+                    <div class="glass-card">
+
+                        <h3>My Toolkit</h3>
+
+                        <p>
+                            Technologies I work with regularly:
+                        </p>
+
+                        <div class="skills">
+
+                            <span class="skill">HTML</span>
+                            <span class="skill">CSS</span>
+                            <span class="skill">JavaScript</span>
+                            <span class="skill">React</span>
+                            <span class="skill">Next.js</span>
+                            <span class="skill">Node.js</span>
+                            <span class="skill">MongoDB</span>
+                            <span class="skill">Git</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECTS -->
+        <section id="projects">
+
+            <div class="section-container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Selected Work
+                    </div>
+
+                    <h2>Projects I've built.</h2>
+
+                    <p>
+                        A selection of projects that showcase my approach
+                        to design, development and problem solving.
+                    </p>
+
+                </div>
+
+
+                <div class="projects-grid">
+
+                    <div class="project">
+
+                        <div class="project-number">
+                            01 / WEB APP
+                        </div>
+
+                        <h3>Finora</h3>
+
+                        <p>
+                            A modern personal finance platform designed
+                            to help users manage spending and investments.
+                        </p>
+
+                        <a href="#" class="project-link">
+                            View Project ↗
+                        </a>
+
+                    </div>
+
+
+                    <div class="project">
+
+                        <div class="project-number">
+                            02 / SAAS
+                        </div>
+
+                        <h3>Flowdesk</h3>
+
+                        <p>
+                            A collaborative workspace helping teams
+                            organize projects, tasks and workflows.
+                        </p>
+
+                        <a href="#" class="project-link">
+                            View Project ↗
+                        </a>
+
+                    </div>
+
+
+                    <div class="project">
+
+                        <div class="project-number">
+                            03 / E-COMMERCE
+                        </div>
+
+                        <h3>Nordic Store</h3>
+
+                        <p>
+                            A minimalist e-commerce experience with
+                            a focus on performance and conversion.
+                        </p>
+
+                        <a href="#" class="project-link">
+                            View Project ↗
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXPERIENCE -->
+        <section id="experience">
+
+            <div class="section-container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Experience
+                    </div>
+
+                    <h2>Where I've worked.</h2>
+
+                </div>
+
+
+                <div class="timeline">
+
+                    <div class="timeline-item">
+
+                        <span>2024 — Present</span>
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Senior Full Stack Developer</h3>
+
+                        <p>
+                            Leading development of scalable web applications,
+                            mentoring developers and working closely with
+                            product and design teams.
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <span>2022 — 2024</span>
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Full Stack Developer</h3>
+
+                        <p>
+                            Built production-ready applications using
+                            React, Node.js, APIs and modern cloud technologies.
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <span>2021 — 2022</span>
+
+                        <div class="timeline-dot"></div>
+
+                        <h3>Frontend Developer</h3>
+
+                        <p>
+                            Developed responsive user interfaces and
+                            collaborated with designers to create engaging
+                            digital experiences.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+        <section id="contact">
+
+            <div class="section-container">
+
+                <div class="contact-box">
+
+                    <div class="section-label">
+                        Get In Touch
+                    </div>
+
+                    <h2>
+                        Have an idea?
+                        <span class="gradient-text">Let's build it.</span>
+                    </h2>
+
+                    <p>
+                        Whether you have a project in mind, want to collaborate,
+                        or simply want to say hello, my inbox is always open.
+                    </p>
+
+                    <a
+                        href="mailto:hello@example.com"
+                        class="primary-btn"
+                    >
+                        hello@example.com
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-container">
+
+            <span>
+                © 2026 Alex Morgan. All rights reserved.
+            </span>
+
+            <span>
+                Designed & Built with ♥
+            </span>
+
+        </div>
+
+    </footer>
 
 </body>
 </html>
